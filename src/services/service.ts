@@ -1,5 +1,6 @@
 import { safeParse } from "valibot"
 import { draftProductSchema } from "../types";
+import axios from "axios";
 
 
 type productData = {
@@ -12,7 +13,11 @@ export async function addProduct(data: productData) {
             price: +data.price
         })
         if (result.success) {
-
+            const url = `${import.meta.env.VITE_API_URL}/api/products`
+            const { data } = await axios.post(url, {
+                name: result.output.name,
+                price: result.output.price
+            })
         } else {
             throw new Error('datos no validos')
         }
