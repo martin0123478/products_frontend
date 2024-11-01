@@ -1,5 +1,5 @@
 import { safeParse } from "valibot"
-import { draftProductSchema, ProductSchema, ProductsSchema } from "../types";
+import { draftProductSchema, ProductsSchema } from "../types";
 import axios from "axios";
 
 
