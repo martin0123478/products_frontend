@@ -4,6 +4,7 @@ import { ProductDetail } from "../components/ProductDetail"
 import { Product } from "../types"
 
 export async function loader() {
+
     const products = await getProducts()
 
     return products
@@ -12,7 +13,7 @@ export async function loader() {
 
 export const Products = () => {
     const data = useLoaderData() as Product[]
-    console.log(data)
+
     return (
         <>
             <div className="flex justify-between">
