@@ -60,3 +60,9 @@ export async function getProductbyId(id: Product['id']) {
     }
 
 }
+
+export async function updateProduct(product: productData, id: Product['id']) {
+    console.log(product)
+    console.log(id)
+
+}
