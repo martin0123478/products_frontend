@@ -1,6 +1,7 @@
 import { ActionFunctionArgs, Form, redirect, useNavigate } from 'react-router-dom'
 import { Product } from "../types"
 import { formatCurrency } from "../utils"
+import { deleteProduct } from '../services/service'
 
 type productDetailProps = {
     product: Product
@@ -8,8 +9,12 @@ type productDetailProps = {
 }
 
 export async function action({ params }: ActionFunctionArgs) {
-    console.log(params.id)
-    return redirect('/')
+    if (params.id !== undefined) {
+        await deleteProduct(+params.id)
+        return redirect('/')
+    }
+
+
 
 }
 export const ProductDetail = ({ product }: productDetailProps) => {
@@ -33,7 +38,12 @@ export const ProductDetail = ({ product }: productDetailProps) => {
                         className='bg-indigo-600 text-white rounded-lg w-full p-2 uppercase font-bold text-xs text-center '>Editar</button>
                     <Form className='w-full'
                         method='POST'
-                        action={`/producto/${product.id}/eliminar`}>
+                        action={`/producto/${product.id}/eliminar`}
+                        onSubmit={(e) => {
+                            if (!confirm('Eliminar Producto ?')) {
+                                e.preventDefault()
+                            }
+                        }}>
                         <input type='submit' value='Eliminar'
                             className='bg-red-600 text-white rounded-lg w-full p-2 uppercase font-bold text-xs text-center ' />
 
