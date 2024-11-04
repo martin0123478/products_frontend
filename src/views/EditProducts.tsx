@@ -1,7 +1,11 @@
-import { Link, Form, useActionData, ActionFunctionArgs, redirect } from 'react-router-dom'
+import { Link, Form, useActionData, ActionFunctionArgs, redirect, LoaderFunctionArgs } from 'react-router-dom'
 import { ErrorMessage } from '../components/ErrorMessage'
 import { addProduct } from '../services/service'
 
+export async function loader({ params }: LoaderFunctionArgs) {
+    console.log(params.id)
+    return {}
+}
 export async function action({ request }: ActionFunctionArgs) {
     const data = Object.fromEntries(await request.formData())
     let error = ''
@@ -19,6 +23,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export const EditProducts = () => {
     const error = useActionData() as string
+
 
     return (
         <>
@@ -44,6 +49,7 @@ export const EditProducts = () => {
                         className="mt-2 block w-full p-3 bg-gray-50"
                         placeholder="Nombre del Producto"
                         name="name"
+
                     />
                 </div>
                 <div className="mb-4">
@@ -57,6 +63,7 @@ export const EditProducts = () => {
                         className="mt-2 block w-full p-3 bg-gray-50"
                         placeholder="Precio Producto. ej. 200, 300"
                         name="price"
+
                     />
                 </div>
                 <input
