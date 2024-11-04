@@ -3,4 +3,9 @@ export function formatCurrency(amount: number) {
         style: 'currency',
         currency: 'USD'
     }).format(amount)
-} 
+}
+
+export function toBoolean(str: string) {
+    return str.toLocaleLowerCase() === 'true'
+
+}
